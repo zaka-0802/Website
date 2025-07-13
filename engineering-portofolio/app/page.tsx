@@ -2,6 +2,81 @@
 
 import { ClickableCard } from "@/components/ui/clickable_card"
 import { useState, useEffect, useRef } from "react"
+import { Volume2, VolumeX, Play, Pause } from "lucide-react"
+
+// Music Player Component
+const MusicPlayer = () => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const audioRef = useRef(null)
+  
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.9
+      audioRef.current.loop = true
+    }
+  }, [])
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+        setIsPlaying(false)
+      } else {
+        audioRef.current.play()
+        setIsPlaying(true)
+        setIsMuted(false)
+      }
+    }
+  }
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.muted = false
+        setIsMuted(false)
+      } else {
+        audioRef.current.muted = true
+        setIsMuted(true)
+      }
+    }
+  }
+
+  const handleClick = () => {
+    if (isPlaying) {
+      toggleMute()
+    } else {
+      toggleMusic()
+    }
+  }
+
+  return (
+    <div className="fixed top-4 left-4 z-50">
+      <audio
+        ref={audioRef}
+        src="/music.mp3"
+        preload="auto"
+        onEnded={() => setIsPlaying(false)}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      
+      <button
+        onClick={handleClick}
+        className="p-3 rounded-full bg-black/20 backdrop-blur-sm hover:bg-black/30 transition-all duration-300"
+        title={!isPlaying ? "Play music" : isMuted ? "Unmute music" : "Mute music"}
+      >
+        {!isPlaying ? (
+          <Volume2 className="w-6 h-6 text-white opacity-60" />
+        ) : isMuted ? (
+          <VolumeX className="w-6 h-6 text-white" />
+        ) : (
+          <Volume2 className="w-6 h-6 text-white" />
+        )}
+      </button>
+    </div>
+  )
+}
 
 export default function HomePage() {
   const [headerHeight, setHeaderHeight] = useState(0)
@@ -50,6 +125,9 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen bg-gray-0 px-4 py-10 sm:px-10 md:px-20">
+      {/* Music Player */}
+      <MusicPlayer />
+
       <div ref={headerRef} className="sticky top-0 z-50 bg-white/0 py-6">
         <h1 className="text-4xl sm:text-5xl font-bold text-center">
           Mechatronics Engineering
