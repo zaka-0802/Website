@@ -253,7 +253,7 @@ const MusicPlayer = () => {
     <div className="fixed top-4 left-4 z-50">
       <audio
         ref={audioRef}
-        src="/background-music.mp3"
+        src="/music.mp3"
         preload="auto"
         onEnded={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
