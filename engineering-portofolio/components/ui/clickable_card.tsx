@@ -82,7 +82,14 @@ export const ClickableCard: React.FC<ClickableCardProps> = ({
         </Card>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent 
+        className="overflow-y-auto"
+        style={{ 
+          width: '70vw', 
+          height: '70vh', 
+          maxWidth: 'none' 
+        }}
+      >
         <DialogHeader className="space-y-4">
           <div className="space-y-2">
             <DialogTitle className="text-3xl font-bold text-gray-900">{title}</DialogTitle>
@@ -91,9 +98,9 @@ export const ClickableCard: React.FC<ClickableCardProps> = ({
 
         <div className="space-y-6">
           {/* Project Image */}
-          <div className="relative h-64 w-full overflow-hidden rounded-lg bg-gray-100">
+          <div className="relative h-80 w-full overflow-hidden rounded-lg bg-gray-100">
             <Image
-              src={imageError ? "/placeholder.svg?height=256&width=896" : imageUrl}
+              src={imageError ? "/placeholder.svg?height=320&width=1152" : imageUrl}
               alt={title}
               fill
               className="object-cover"
