@@ -2,13 +2,37 @@
 
 import { ClickableCard } from "@/components/ui/clickable_card"
 import { useState, useEffect, useRef } from "react"
-import { Volume2, VolumeX, Play, Pause } from "lucide-react"
+import { Volume2, VolumeX } from "lucide-react"
 
 // Animated Background Component
+interface Particle {
+  id: number
+  x: number
+  y: number
+  speed: number
+  opacity: number
+  size: number
+  layer: number
+  angle: number
+  windOffset: number
+  pulse: number
+  trail: boolean
+}
+
+interface Square {
+  id: number
+  x: number
+  y: number
+  speed: number
+  size: number
+  opacity: number
+  rotation: number
+}
+
 const AnimatedBackground = () => {
-  const [particles, setParticles] = useState([])
-  const [squares, setSquares] = useState([])
-  const animationRef = useRef()
+  const [particles, setParticles] = useState<Particle[]>([])
+  const [squares, setSquares] = useState<Square[]>([])
+  const animationRef = useRef<number | null>(null)
 
   useEffect(() => {
     // Initialize particles (rain pixels)
@@ -207,7 +231,7 @@ const AnimatedBackground = () => {
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
-  const audioRef = useRef(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
     if (audioRef.current) {
@@ -280,8 +304,8 @@ const MusicPlayer = () => {
 export default function HomePage() {
   const [headerHeight, setHeaderHeight] = useState(0)
   const [scrollY, setScrollY] = useState(0)
-  const headerRef = useRef(null)
-  const containerRef = useRef(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const updateHeaderHeight = () => {
