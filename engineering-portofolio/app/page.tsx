@@ -14,7 +14,7 @@ const AnimatedBackground = () => {
     // Initialize particles (rain pixels)
     const initParticles = () => {
       const newParticles = []
-      for (let i = 0; i < 180; i++) {
+      for (let i = 0; i < 181; i++) {
         const layer = Math.floor(i / 60) // 3 layers of 60 particles each
         const baseSpeed = layer === 0 ? 0.8 : layer === 1 ? 2 : 4
         const baseSize = layer === 0 ? 0.8 : layer === 1 ? 1.5 : 2.5
