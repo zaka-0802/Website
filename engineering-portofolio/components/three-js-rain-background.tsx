@@ -11,7 +11,7 @@ class RainEffect {
   renderer: THREE.WebGLRenderer
   rainCount: number
   velocityArray: Float32Array
-  rain: THREE.Points
+  rain: THREE.Points | null = null
   animationFrameId: number | null
 
   constructor(container: HTMLDivElement) {
@@ -83,6 +83,8 @@ class RainEffect {
   animate() {
     this.animationFrameId = requestAnimationFrame(this.animate.bind(this))
 
+    if (!this.rain) return
+
     const positions = this.rain.geometry.attributes.position.array
     for (let i = 1; i < positions.length; i += 3) {
       positions[i] -= this.velocityArray[(i - 1) / 3]
@@ -105,9 +107,6 @@ class RainEffect {
     }
     this.scene.clear()
     this.renderer.dispose()
-    this.camera = null as any // Clear reference
-    this.scene = null as any // Clear reference
-    this.renderer = null as any // Clear reference
   }
 }
 
