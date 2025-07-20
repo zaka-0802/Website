@@ -130,7 +130,7 @@ export default function HomePage() {
       {/* Music Player */}
       <MusicPlayer />
       <div ref={headerRef} className="sticky top-0 z-50 bg-white/0 py-6">
-        <h1 className="text-4xl sm:text-5xl font-bold text-center text-white">Mechatronics Engineering</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-center text-white">Portofolio Website Under Construction</h1>
       </div>
       <div
         ref={containerRef}
